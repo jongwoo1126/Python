@@ -4,25 +4,36 @@
 내용 : 파이썬 중첩함수 실습
 """
 
+
 # 일급함수와 클로저 p134
 def a():
     print('a 함수')
+
     def b():
         print('b 함수')
+
     return b
+
+
 b = a()
 b()
 
 data = list(range(1, 101))
+
+
 def outer_func(data):
     dataSet = data
+
     def tot():
         tot_val = sum(dataSet)
         return tot_val
+
     def avg(tot_val):
         avg_val = tot_val / len(dataSet)
         return avg_val
+
     return tot, avg
+
 
 tot, avg = outer_func(data)
 
@@ -37,6 +48,7 @@ from math import sqrt
 
 data = [4, 5, 3.5, 2.5, 6.3, 5.5]
 
+
 def scattering_func(data):
     dataSet = data
 
@@ -45,7 +57,7 @@ def scattering_func(data):
         return avg_val
 
     def var_func(avg):
-        diff = [(data - avg)**2 for data in dataSet]
+        diff = [(data - avg) ** 2 for data in dataSet]
         print(sum(diff))
         var_val = sum(diff) / (len(dataSet) - 1)
         return var_val
@@ -62,3 +74,25 @@ avg, var, std = scattering_func(data)
 print('평균 : ', avg())
 print('분산 : ', var(avg()))
 print('표준편차 : ', std(var(avg())))
+
+
+# 획득자와 지정자
+def main_func(num):
+    num_val = num
+
+    def getter():  # 획득자 함수
+        return num_val
+
+    def setter(value):  # 지정자 함수
+        nonlocal num_val
+        num_val = value
+
+    return getter, setter
+
+
+getter, setter = main_func(100)
+
+print('num = ', getter())
+
+setter(200)
+print('num = ', getter())
