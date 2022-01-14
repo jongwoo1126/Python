@@ -43,16 +43,21 @@ def scattering_func(data):
     def avg_func():
         avg_val = mean(dataSet)
         return avg_val
+
     def var_func(avg):
         diff = [(data - avg)**2 for data in dataSet]
         print(sum(diff))
         var_val = sum(diff) / (len(dataSet) - 1)
         return var_val
+
     def std_func(var):
         std_val = sqrt(var)
         return std_val
 
     return avg_func, var_func, std_func
+
+
+avg, var, std = scattering_func(data)
 
 print('평균 : ', avg())
 print('분산 : ', var(avg()))
