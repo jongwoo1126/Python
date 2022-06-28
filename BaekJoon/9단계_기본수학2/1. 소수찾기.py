@@ -7,7 +7,6 @@ for i in list:
         if i % j == 0:
             if i == j:
                 count += 1
-
             break
 
 print(count)
